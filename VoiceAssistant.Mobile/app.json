@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "name": "VoiceAssistant.Mobile",
+    "slug": "VoiceAssistant-Mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.seninadın.voiceassistant",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Jarvis'in sizi duyabilmesi için mikrofon izni gerekiyor.",
+        "UIBackgroundModes": [
+          "audio",
+          "fetch"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.salihustun57.voiceassistantmobile",
+      "permissions": [
+        "RECORD_AUDIO",
+        "WAKE_LOCK",
+        "INTERNET",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Jarvis'in sesinizi duyması için izin verin."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "55f0bf1e-90a2-4c5e-aa72-bde6b49c633c"
+      }
+    }
+  }
+}

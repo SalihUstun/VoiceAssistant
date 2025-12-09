@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-multipart
+requests
+ollama
+SpeechRecognition
+pydub
+elevenlabs
+

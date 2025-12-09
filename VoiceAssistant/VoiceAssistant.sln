@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceAssistant.Business", "VoiceAssistant.Business\VoiceAssistant.Business.csproj", "{8A8F471A-2835-4A64-A599-A1B7C2A6E51C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceAssistant.DataAccess", "VoiceAssistant.DataAccess\VoiceAssistant.DataAccess.csproj", "{955BFD34-0B03-44C0-BDB6-14B53B39151F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceAssistant.API", "VoiceAssistant.API\VoiceAssistant.API.csproj", "{A05C7033-4304-41E0-B03A-CCD16CF583C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A8F471A-2835-4A64-A599-A1B7C2A6E51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8F471A-2835-4A64-A599-A1B7C2A6E51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8F471A-2835-4A64-A599-A1B7C2A6E51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8F471A-2835-4A64-A599-A1B7C2A6E51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955BFD34-0B03-44C0-BDB6-14B53B39151F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955BFD34-0B03-44C0-BDB6-14B53B39151F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955BFD34-0B03-44C0-BDB6-14B53B39151F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955BFD34-0B03-44C0-BDB6-14B53B39151F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A05C7033-4304-41E0-B03A-CCD16CF583C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05C7033-4304-41E0-B03A-CCD16CF583C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05C7033-4304-41E0-B03A-CCD16CF583C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05C7033-4304-41E0-B03A-CCD16CF583C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

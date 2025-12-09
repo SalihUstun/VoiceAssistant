@@ -1,0 +1,15 @@
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/bin/Debug/net9.0/VoiceAssistant.Business.deps.json
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/bin/Debug/net9.0/VoiceAssistant.Business.dll
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/bin/Debug/net9.0/VoiceAssistant.Business.pdb
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/bin/Debug/net9.0/VoiceAssistant.DataAccess.dll
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/bin/Debug/net9.0/VoiceAssistant.DataAccess.pdb
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.csproj.AssemblyReference.cache
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.AssemblyInfoInputs.cache
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.AssemblyInfo.cs
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.csproj.CoreCompileInputs.cache
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAss.EE37E00B.Up2Date
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.dll
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/refint/VoiceAssistant.Business.dll
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/VoiceAssistant.Business.pdb
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/Debug/net9.0/ref/VoiceAssistant.Business.dll
