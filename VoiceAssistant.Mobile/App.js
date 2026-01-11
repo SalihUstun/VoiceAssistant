@@ -18,13 +18,13 @@ export default function App() {
   useEffect(() => {
     const checkLogin = async () => {
       try {
-        console.log('🔍 Checking authentication...');
+        console.log('   Checking authentication...');
         const userData = await authService.checkAuth();
         if (userData) {
-          console.log('✅ User authenticated:', userData.username);
+          console.log('   User authenticated:', userData.username);
           setInitialRoute({ name: 'Home', params: userData });
         } else {
-          console.log('❌ No authentication found');
+          console.log('   No authentication found');
           setInitialRoute({ name: 'Login', params: {} });
         }
       } catch (e) {

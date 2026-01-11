@@ -4,7 +4,6 @@ import { nativeService } from './nativeService';
 import { permissionService } from './permissionService';
 
 class CommandService {
-  // Alarm işlemleri
   async getAlarms() {
     try {
       const response = await api.get('/command/alarms');
@@ -38,7 +37,6 @@ class CommandService {
     }
   }
 
-  // Kişi işlemleri
   async getContacts() {
     try {
       const response = await api.get('/command/contacts');
@@ -61,7 +59,6 @@ class CommandService {
     }
   }
 
-  // Uygulama işlemleri
   async getInstalledApps() {
     try {
       const response = await api.get('/command/apps');
@@ -84,7 +81,6 @@ class CommandService {
     }
   }
 
-  // Hava durumu işlemleri
   async getCurrentWeather(location = 'current') {
     try {
       const response = await api.get(`/command/weather?location=${location}`);
@@ -105,14 +101,12 @@ class CommandService {
     }
   }
 
-  // Komut işleme sonuçlarını handle etme
   handleCommandResult(commandResult) {
     if (!commandResult) return;
 
-    console.log('🎯 Komut sonucu işleniyor:', commandResult);
-    console.log('🎯 Action:', commandResult.action);
+    console.log(' Komut sonucu işleniyor:', commandResult);
+    console.log(' Action:', commandResult.action);
 
-    // Action'a göre işlem yap
     if (commandResult.action === 'CREATE_ALARM') {
       this.handleAlarmCreated(commandResult);
     } else if (commandResult.action === 'MAKE_CALL') {
@@ -127,24 +121,23 @@ class CommandService {
   }
 
   handleAlarmCreated(result) {
-    console.log('⏰ handleAlarmCreated çağrıldı:', result);
+    console.log('  handleAlarmCreated çağrıldı:', result);
     
     if (result.success) {
-      console.log('✅ Alarm oluşturuldu:', result.message);
+      console.log(' Alarm oluşturuldu:', result.message);
       
       // Native alarm oluşturma
       const { time, label } = result.data;
-      console.log('⏰ Alarm detayları:', { time, label });
+      console.log(' Alarm detayları:', { time, label });
       
       Alert.alert(
-        "Alarm Oluştur", 
         `${time} saatinde "${label}" alarmı oluşturulsun mu?`,
         [
           { text: "İptal", style: "cancel" },
           { 
             text: "Oluştur", 
             onPress: async () => {
-              console.log('⏰ Kullanıcı alarm oluşturmayı onayladı');
+              console.log('  Kullanıcı alarm oluşturmayı onayladı');
               await nativeService.createAlarm(time, label);
             }
           }
@@ -152,45 +145,42 @@ class CommandService {
       );
       
     } else {
-      console.log('❌ Alarm oluşturulamadı:', result.errorMessage);
+      console.log('   Alarm oluşturulamadı:', result.errorMessage);
       Alert.alert("Hata", `Alarm oluşturulamadı: ${result.errorMessage}`);
     }
   }
 
   async handleCallInitiated(result) {
-    console.log('📞 handleCallInitiated çağrıldı:', result);
+    console.log('  handleCallInitiated çağrıldı:', result);
     
     if (result.success) {
-      console.log('📞 Arama başlatıldı:', result.message);
+      console.log('  Arama başlatıldı:', result.message);
       
-      // Native call başlat
       const contactName = result.data?.contact_name;
-      console.log('📞 Kişi adı:', contactName);
+      console.log('  Kişi adı:', contactName);
       
-      // Gerçek kişilerden telefon numarası bul
       const phoneNumber = await nativeService.findRealContactPhone(contactName);
-      console.log('📞 Telefon numarası:', phoneNumber);
+      console.log('  Telefon numarası:', phoneNumber);
       
       if (phoneNumber) {
-        // Önce izin kontrol et
-        console.log('📞 İzin kontrolü başlatılıyor...');
+        console.log(' İzin kontrolü başlatılıyor...');
         this.initiateCallWithPermission(contactName, phoneNumber);
       } else {
-        console.log('❌ Telefon numarası bulunamadı');
+        console.log('   Telefon numarası bulunamadı');
         Alert.alert("Hata", `${contactName} için telefon numarası bulunamadı. Kişilerinizde "${contactName}" isimli bir kişi var mı?`);
       }
       
     } else {
-      console.log('❌ Arama başlatılamadı:', result.errorMessage);
+      console.log('   Arama başlatılamadı:', result.errorMessage);
     }
   }
 
-  // İzin kontrolü ile arama başlat
+
   async initiateCallWithPermission(contactName, phoneNumber) {
     try {
-      console.log('📞 İzin kontrol ediliyor...');
+      console.log('  İzin kontrol ediliyor...');
       
-      // Telefon arama izni kontrol et
+
       const hasPermission = await permissionService.requestCallPermission();
       
       if (hasPermission) {
@@ -202,14 +192,14 @@ class CommandService {
             { 
               text: "Ara", 
               onPress: () => {
-                console.log('📞 Arama başlatılıyor:', phoneNumber);
+                console.log('  Arama başlatılıyor:', phoneNumber);
                 nativeService.makeCall(phoneNumber);
               }
             }
           ]
         );
       } else {
-        console.log('❌ Telefon arama izni yok');
+        console.log('   Telefon arama izni yok');
       }
     } catch (error) {
       console.error('Arama izni hatası:', error);
@@ -219,9 +209,9 @@ class CommandService {
 
   handleAppLaunch(result) {
     if (result.success) {
-      console.log('🚀 Uygulama açılıyor:', result.message);
+      console.log('   Uygulama açılıyor:', result.message);
       
-      // Native app launch
+
       const appName = result.data?.app_name;
       const packageName = nativeService.getAppPackageName(appName);
       
@@ -242,16 +232,15 @@ class CommandService {
       }
       
     } else {
-      console.log('❌ Uygulama açılamadı:', result.errorMessage);
+      console.log('   Uygulama açılamadı:', result.errorMessage);
     }
   }
 
   handleWeatherInfo(result) {
     if (result.success) {
-      console.log('🌤️ Hava durumu:', result.message);
-      // Hava durumu bilgisini UI'da göster
+      console.log('Hava durumu:', result.message);
     } else {
-      console.log('❌ Hava durumu alınamadı:', result.errorMessage);
+      console.log('Hava durumu alınamadı:', result.errorMessage);
     }
   }
 }

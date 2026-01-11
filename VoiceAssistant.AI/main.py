@@ -13,7 +13,7 @@ from typing import Dict, Any, Optional
 
 ELEVENLABS_API_KEY = "sk_8a9394ab1885d419b8dceeb7d34f0042386d2226e99a9aaf"
 
-# Intent Classification Patterns
+
 INTENT_PATTERNS = {
     "create_alarm": {
         "patterns": [
@@ -63,7 +63,7 @@ INTENT_PATTERNS = {
     },
     "general_question": {
         "patterns": [
-            r".*"  # Fallback pattern
+            r".*"  
         ],
         "action": "GENERAL_CHAT",
         "entities": []
@@ -103,7 +103,7 @@ class IntentResult(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "VoiceAssistant AI Service (ElevenLabs + Ollama + Silence Check) Running! 🚀"}
+    return {"message": "Sesli Asistan API'sine Hoşgeldiniz!"}
 
 def convert_to_mp3(input_path):
 
@@ -131,7 +131,7 @@ def speech_to_text_elevenlabs(audio_path):
 
     try:
         if is_silent(audio_path):
-            print("🤫 Ses dosyası sessiz algılandı.")
+            print(" Ses dosyası sessiz algılandı.")
             return "Ses anlaşılamadı."
 
         with open(audio_path, "rb") as audio_file:
@@ -150,9 +150,6 @@ def speech_to_text_elevenlabs(audio_path):
         return "Ses anlaşılamadı."
 
 def classify_intent(text: str) -> IntentResult:
-    """
-    Kullanıcı metnini analiz ederek intent ve entity'leri çıkarır
-    """
     text_lower = text.lower().strip()
     
     for intent_name, intent_config in INTENT_PATTERNS.items():
@@ -168,8 +165,7 @@ def classify_intent(text: str) -> IntentResult:
                     action=intent_config["action"],
                     parameters=entities
                 )
-    
-    # Fallback to general question
+
     return IntentResult(
         intent="general_question",
         confidence=0.3,
@@ -179,13 +175,10 @@ def classify_intent(text: str) -> IntentResult:
     )
 
 def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
-    """
-    Regex match'inden entity'leri çıkarır
-    """
+
     entities = {}
     
     if "time" in entity_types:
-        # Saat çıkarma için daha kapsamlı regex
         time_patterns = [
             r"saat (\d{1,2}):?(\d{2})?",
             r"(\d{1,2}):(\d{2})",
@@ -193,13 +186,12 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
             r"(\d{1,2})\.(\d{2})",
             r"(\d{1,2})'?e",
             r"(\d{1,2})'?a",
-            r"yediye",  # "yedi" için özel case
-            r"sekize",  # "sekiz" için özel case
-            r"dokuza",  # "dokuz" için özel case
-            r"ona"      # "on" için özel case
+            r"yediye",  
+            r"sekize",  
+            r"dokuza",  
+            r"ona"     
         ]
         
-        # Sayı kelimelerini rakama çevirme
         number_words = {
             "bir": "1", "iki": "2", "üç": "3", "dört": "4", "beş": "5",
             "altı": "6", "yedi": "7", "sekiz": "8", "dokuz": "9", "on": "10",
@@ -211,7 +203,6 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
             time_match = re.search(pattern, text)
             if time_match:
                 if pattern in [r"yediye", r"sekize", r"dokuza", r"ona"]:
-                    # Özel kelime durumları
                     hour = int(number_words.get(time_match.group(0), "8"))
                     minute = 0
                 else:
@@ -220,14 +211,12 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
                 entities["time"] = f"{hour:02d}:{minute:02d}"
                 break
         
-        # Kelime olarak yazılmış saatleri kontrol et
         if "time" not in entities:
             for word, number in number_words.items():
                 if word in text:
                     entities["time"] = f"{int(number):02d}:00"
                     break
         
-        # "yediye", "sekize" gibi özel durumlar için
         if "time" not in entities:
             special_time_words = {
                 "yediye": "07:00", "sekize": "08:00", "dokuza": "09:00", 
@@ -239,12 +228,10 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
                     entities["time"] = time
                     break
         
-        # Eğer hiç saat bulunamazsa default
         if "time" not in entities:
             entities["time"] = "08:00"
     
     if "contact_name" in entity_types:
-        # İsim çıkarma logic'i
         contact_patterns = [
             r"(babam|annem|kardeşim|eşim|ablam|abim)",
             r"ara (.+)",
@@ -273,7 +260,7 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
             if location_match:
                 entities["location"] = location_match.group(1).strip()
         else:
-            entities["location"] = "current"  # Default to current location
+            entities["location"] = "current"  
     
     if "date" in entity_types:
         if "yarın" in text:
@@ -281,7 +268,7 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
         elif "bugün" in text:
             entities["date"] = "today"
         else:
-            entities["date"] = "today"  # Default
+            entities["date"] = "today"  
     
     if "label" in entity_types:
         # Alarm label çıkarma
@@ -289,14 +276,12 @@ def extract_entities(text: str, match, entity_types: list) -> Dict[str, Any]:
         if label_match:
             entities["label"] = label_match.group(2).strip()
         else:
-            entities["label"] = "Alarm"  # Default
+            entities["label"] = "Alarm"  
     
     return entities
 
 def generate_smart_response(intent_result: IntentResult, original_text: str) -> str:
-    """
-    Intent'e göre akıllı yanıt üretir
-    """
+
     if intent_result.action == "CREATE_ALARM":
         time = intent_result.entities.get("time", "belirsiz saat")
         label = intent_result.entities.get("label", "Alarm")
@@ -319,7 +304,6 @@ def generate_smart_response(intent_result: IntentResult, original_text: str) -> 
             return f"Tamam, {location} için {date} hava durumunu kontrol ediyorum."
     
     else:
-        # General chat için Ollama kullan
         return ask_llama_local(original_text)
 
 def ask_llama_local(prompt):
@@ -386,16 +370,16 @@ async def process_audio(
             audio_b64 = ""
             intent_result = None
         else:
-            print("🧠 Intent analiz ediliyor...")
+            print("Intent analiz ediliyor...")
             intent_result = classify_intent(user_text)
-            print(f"🎯 Intent: {intent_result.intent}, Action: {intent_result.action}")
-            print(f"📊 Entities: {intent_result.entities}")
+            print(f" Intent: {intent_result.intent}, Action: {intent_result.action}")
+            print(f"Entities: {intent_result.entities}")
             
-            print("💭 Yanıt üretiliyor...")
+            print(" Yanıt üretiliyor...")
             ai_reply = generate_smart_response(intent_result, user_text)
-            print(f"💬 Cevap: {ai_reply}")
+            print(f" Cevap: {ai_reply}")
 
-            print("🔊 Konuşuluyor...")
+            print(" Konuşuluyor...")
             output_file = f"response_{user_id}.mp3"
             audio_path = text_to_speech_elevenlabs(ai_reply, output_file)
             

@@ -2,10 +2,9 @@ import { Alert, Linking, Platform, PermissionsAndroid } from 'react-native';
 
 class PermissionService {
   
-  // Telefon arama izni kontrol et ve iste (Android için)
+
   async requestCallPermission() {
     try {
-      console.log('📞 Telefon arama izni kontrol ediliyor...');
       
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -20,26 +19,25 @@ class PermissionService {
         );
         
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('✅ Telefon arama izni verildi');
+
           return true;
         } else {
-          console.log('❌ Telefon arama izni reddedildi');
+
           this.showPermissionDeniedAlert('Telefon Arama', 'Arama yapabilmek için telefon iznine ihtiyaç var.');
           return false;
         }
       }
       
-      return true; // iOS için farklı yaklaşım gerekebilir
+      return true; 
     } catch (error) {
       console.error('Telefon izni hatası:', error);
       return false;
     }
   }
   
-  // Kişiler izni kontrol et ve iste
+
   async requestContactsPermission() {
     try {
-      console.log('📋 Kişiler izni kontrol ediliyor...');
       
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -54,10 +52,8 @@ class PermissionService {
         );
         
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('✅ Kişiler izni verildi');
           return true;
         } else {
-          console.log('❌ Kişiler izni reddedildi');
           this.showPermissionDeniedAlert('Kişiler', 'Kişileri arayabilmek için kişiler iznine ihtiyaç var.');
           return false;
         }
@@ -70,7 +66,7 @@ class PermissionService {
     }
   }
   
-  // İzin reddedildi uyarısı
+
   showPermissionDeniedAlert(permissionName, message) {
     Alert.alert(
       `${permissionName} İzni Gerekli`,
@@ -85,20 +81,13 @@ class PermissionService {
     );
   }
   
-  // Tüm gerekli izinleri kontrol et
+
   async checkAllPermissions() {
-    console.log('🔍 Tüm izinler kontrol ediliyor...');
     
     const callPermission = await this.requestCallPermission();
     const contactsPermission = await this.requestContactsPermission();
     
     const allGranted = callPermission && contactsPermission;
-    
-    if (allGranted) {
-      console.log('✅ Tüm izinler verildi');
-    } else {
-      console.log('❌ Bazı izinler eksik');
-    }
     
     return allGranted;
   }

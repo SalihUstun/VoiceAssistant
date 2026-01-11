@@ -33,16 +33,14 @@ export default function HomeScreen({ route, navigation }) {
 
   useEffect(() => {
     (async () => {
-      console.log('🚀 HomeScreen başlatılıyor...');
+      console.log('   HomeScreen başlatılıyor...');
       
-      // Ses izinlerini kontrol et
       const { status } = await Audio.requestPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('Hata', 'Mikrofon izni gerekli.');
         return;
       }
 
-      // Ses ayarlarını yapılandır
       await Audio.setAudioModeAsync({
         allowsRecordingIOS: true,
         playsInSilentModeIOS: true, 
@@ -51,22 +49,12 @@ export default function HomeScreen({ route, navigation }) {
         playThroughEarpieceAndroid: false
       });
       
-      // Diğer izinleri kontrol et ve kişileri yükle
       setTimeout(async () => {
         await permissionService.checkAllPermissions();
         
-        // Kişileri yükle
-        console.log('📋 Kişiler yükleniyor...');
+
         const contactsLoaded = await contactsService.loadContacts();
-        
-        if (contactsLoaded) {
-          console.log('✅ Kişiler başarıyla yüklendi');
-          // İlk 5 kişiyi listele (debug amaçlı)
-          contactsService.listAllContacts();
-        } else {
-          console.log('❌ Kişiler yüklenemedi');
-        }
-      }, 2000); // 2 saniye sonra diğer izinleri kontrol et
+      }, 2000); 
     })();
   }, []);
 
@@ -96,28 +84,25 @@ export default function HomeScreen({ route, navigation }) {
 
   async function playResponseAudio(base64String) {
     try {
-      console.log('🔊 Ses çalma başlıyor...');
       
       if (!base64String) {
-        console.log('❌ Base64 string boş');
+        console.log('   Base64 string boş');
         return;
       }
       
       const uri = FileSystem.cacheDirectory + 'response.mp3';
       
-      // Legacy API kullanarak
       await FileSystem.writeAsStringAsync(uri, base64String, {
         encoding: FileSystem.EncodingType.Base64,
       });
       
-      console.log('📁 Ses dosyası yazıldı:', uri);
+      console.log(' Ses dosyası yazıldı:', uri);
       
       const { sound: newSound } = await Audio.Sound.createAsync({ uri });
       setSound(newSound);
       
       newSound.setOnPlaybackStatusUpdate(async (status) => {
         if (status.didJustFinish) {
-          console.log('✅ Ses çalma tamamlandı');
           await newSound.unloadAsync();
           if (autoMode) {
              setTimeout(() => startRecording(), 500);
@@ -125,10 +110,10 @@ export default function HomeScreen({ route, navigation }) {
         }
       });
 
-      console.log('▶️ Ses çalmaya başlıyor...');
+
       await newSound.playAsync();
     } catch (error) {
-      console.log('❌ Ses çalma hatası:', error);
+      console.log('   Ses çalma hatası:', error);
       if (autoMode) setTimeout(() => startRecording(), 500);
     }
   }
@@ -185,27 +170,18 @@ export default function HomeScreen({ route, navigation }) {
     formData.append('AudioFile', { uri: uri, type: 'audio/m4a', name: 'voice.m4a' });
 
     try {
-      console.log('📤 Ses dosyası gönderiliyor...');
       const response = await api.post('/Assistant/send-audio', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      console.log('📥 API yanıtı alındı:', response.status);
       const { recognizedText, aiResponse, audioBase64, intent, action, commandResult } = response.data;
       
-      console.log('🎯 Tanınan metin:', recognizedText);
-      console.log('💬 AI yanıtı:', aiResponse);
-      console.log('🔊 Audio Base64 var mı:', audioBase64 ? 'Evet' : 'Hayır');
-      console.log('🎯 Intent:', intent, 'Action:', action);
       
-      // Komut işleme sonucunu handle et
       if (commandResult) {
-        console.log('🎯 CommandResult bulundu, handle ediliyor...');
-        // Action bilgisini commandResult'a ekle
         commandResult.action = action;
         commandService.handleCommandResult(commandResult);
       } else {
-        console.log('❌ CommandResult bulunamadı');
+        console.log('CommandResult bulunamadı');
       }
       
       if (recognizedText && recognizedText !== "Ses anlaşılamadı") {
@@ -221,25 +197,23 @@ export default function HomeScreen({ route, navigation }) {
               
               addMessage(recognizedText, 'user');
               
-              // Intent ve action bilgisini göster (debug amaçlı)
               if (intent && action) {
-                console.log(`🎯 Intent: ${intent}, Action: ${action}`);
+                console.log(` Intent: ${intent}, Action: ${action}`);
               }
               
               if (aiResponse) addMessage(aiResponse, 'ai');
               if (audioBase64) {
-                  console.log('🔊 Sesli yanıt çalmaya başlıyor...');
                   await playResponseAudio(audioBase64);
                   return; 
               } else {
-                  console.log('❌ Audio Base64 bulunamadı');
+                  console.log('   Audio Base64 bulunamadı');
               }
           }
       } else {
-          console.log('❌ Tanınan metin yok veya anlaşılamadı');
+          console.log('   Tanınan metin yok veya anlaşılamadı');
       }
     } catch (error) {
-      console.log("❌ Upload hatası:", error);
+      console.log("   Upload hatası:", error);
       if(error.response?.status === 401) {
           Alert.alert("Oturum Doldu", "Lütfen tekrar giriş yapın.", [{text:"OK", onPress: () => navigation.replace('Login')}]);
       }

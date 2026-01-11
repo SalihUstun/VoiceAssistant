@@ -4,17 +4,15 @@ import { contactsService } from './contactsService';
 
 class NativeService {
   
-  // Alarm oluşturma
+
   async createAlarm(time, label) {
     try {
-      console.log(`⏰ Native alarm oluşturuluyor: ${time} - ${label}`);
+      console.log(`  Native alarm oluşturuluyor: ${time} - ${label}`);
       
       if (Platform.OS === 'android') {
-        // Saati parse et
         const [hours, minutes] = time.split(':').map(num => parseInt(num));
-        console.log(`⏰ Parsed time: ${hours}:${minutes}`);
+        console.log(`  Parsed time: ${hours}:${minutes}`);
         
-        // Birden fazla yöntem dene
         const methods = [
           () => this.createAlarmWithIntent(hours, minutes, label),
           () => this.createAlarmWithProvider(hours, minutes, label),
@@ -23,12 +21,12 @@ class NativeService {
         
         for (let i = 0; i < methods.length; i++) {
           try {
-            console.log(`⏰ Yöntem ${i + 1} deneniyor...`);
+            console.log(`  Yöntem ${i + 1} deneniyor...`);
             await methods[i]();
-            console.log(`✅ Yöntem ${i + 1} başarılı!`);
+            console.log(`   Yöntem ${i + 1} başarılı!`);
             return;
           } catch (error) {
-            console.log(`❌ Yöntem ${i + 1} başarısız:`, error.message);
+            console.log(`   Yöntem ${i + 1} başarısız:`, error.message);
             if (i === methods.length - 1) {
               throw error;
             }
@@ -36,12 +34,11 @@ class NativeService {
         }
       }
     } catch (error) {
-      console.error('❌ Tüm alarm yöntemleri başarısız:', error);
+      console.error('   Tüm alarm yöntemleri başarısız:', error);
       Alert.alert('Hata', `Alarm oluşturulamadı. Lütfen manuel olarak saat uygulamasından ${time} için alarm kurun.`);
     }
   }
   
-  // Intent ile alarm oluştur
   async createAlarmWithIntent(hours, minutes, label) {
     const alarmIntent = {
       action: 'android.intent.action.SET_ALARM',
@@ -56,7 +53,6 @@ class NativeService {
     await IntentLauncher.startActivityAsync('android.intent.action.SET_ALARM', alarmIntent);
   }
   
-  // AlarmClock provider ile alarm oluştur
   async createAlarmWithProvider(hours, minutes, label) {
     const alarmUri = `content://com.android.calendar/time/${Date.now()}`;
     const alarmUrl = `alarmclock://set?hour=${hours}&minute=${minutes}&message=${encodeURIComponent(label)}`;
@@ -69,12 +65,10 @@ class NativeService {
     }
   }
   
-  // Clock uygulamasını belirli saatle aç
   async openClockAppWithTime(hours, minutes, label) {
     try {
-      console.log(`⏰ Clock app açılıyor: ${hours}:${minutes} - ${label}`);
+      console.log(`  Clock app açılıyor: ${hours}:${minutes} - ${label}`);
       
-      // Farklı clock app URL'leri dene
       const clockUrls = [
         `android-app://com.google.android.deskclock/timer?hour=${hours}&minute=${minutes}`,
         `android-app://com.google.android.deskclock`,
@@ -88,10 +82,10 @@ class NativeService {
         try {
           const supported = await Linking.canOpenURL(url);
           if (supported) {
-            console.log(`✅ Clock app açılıyor: ${url}`);
+            console.log(`   Clock app açılıyor: ${url}`);
             await Linking.openURL(url);
             
-            // Kullanıcıya bilgi ver
+
             setTimeout(() => {
               Alert.alert(
                 "Saat Uygulaması Açıldı", 
@@ -103,7 +97,7 @@ class NativeService {
             return;
           }
         } catch (error) {
-          console.log(`❌ URL başarısız: ${url}`);
+          console.log(`   URL başarısız: ${url}`);
           continue;
         }
       }
@@ -119,7 +113,6 @@ class NativeService {
     }
   }
   
-  // Clock uygulamasını aç
   async openClockApp() {
     const clockUrls = [
       'android-app://com.google.android.deskclock',
@@ -142,35 +135,33 @@ class NativeService {
     Alert.alert('Bilgi', 'Saat uygulaması bulunamadı');
   }
   
-  // Telefon araması
   async makeCall(phoneNumber) {
     try {
-      console.log(`📞 Native arama başlatılıyor: ${phoneNumber}`);
+      console.log(`  Native arama başlatılıyor: ${phoneNumber}`);
       
       const url = `tel:${phoneNumber}`;
-      console.log(`📞 Arama URL'si: ${url}`);
+      console.log(`  Arama URL'si: ${url}`);
       
       const supported = await Linking.canOpenURL(url);
-      console.log(`📞 URL destekleniyor mu: ${supported}`);
+      console.log(`  URL destekleniyor mu: ${supported}`);
       
       if (supported) {
-        console.log('📞 Linking.openURL çağrılıyor...');
+        console.log('  Linking.openURL çağrılıyor...');
         await Linking.openURL(url);
-        console.log('✅ Arama başlatıldı');
+        console.log('   Arama başlatıldı');
       } else {
-        console.log('❌ Tel URL desteklenmiyor');
+        console.log('   Tel URL desteklenmiyor');
         Alert.alert('Hata', 'Arama özelliği desteklenmiyor');
       }
     } catch (error) {
-      console.error('❌ Arama hatası:', error);
+      console.error('   Arama hatası:', error);
       Alert.alert('Hata', `Arama başlatılamadı: ${error.message}`);
     }
   }
   
-  // Uygulama başlatma
   async launchApp(packageName, appName) {
     try {
-      console.log(`🚀 Uygulama başlatılıyor: ${appName} (${packageName})`);
+      console.log(`   Uygulama başlatılıyor: ${appName} (${packageName})`);
       
       if (Platform.OS === 'android') {
         const appUrl = `android-app://${packageName}`;
@@ -178,9 +169,9 @@ class NativeService {
         
         if (supported) {
           await Linking.openURL(appUrl);
-          console.log('✅ Uygulama başlatıldı');
+          console.log('   Uygulama başlatıldı');
         } else {
-          // Play Store'da aç
+
           const playStoreUrl = `market://details?id=${packageName}`;
           const playStoreSupported = await Linking.canOpenURL(playStoreUrl);
           
@@ -204,7 +195,7 @@ class NativeService {
     }
   }
   
-  // Popüler uygulamaların package name'lerini al
+
   getAppPackageName(appName) {
     const packages = {
       'whatsapp': 'com.whatsapp',
@@ -225,7 +216,7 @@ class NativeService {
     return packages[appName.toLowerCase()];
   }
   
-  // Demo kişiler (fallback)
+
   getContactPhone(contactName) {
     const contacts = {
       'babam': '+905551234567',
@@ -239,34 +230,34 @@ class NativeService {
     return contacts[contactName.toLowerCase()];
   }
   
-  // Gerçek kişilerden telefon numarası bul
+
   async findRealContactPhone(contactName) {
     try {
-      console.log(`🔍 Gerçek kişilerde aranıyor: ${contactName}`);
+      console.log(`   Gerçek kişilerde aranıyor: ${contactName}`);
       
-      // Gerçek kişilerden ara
+
       const realPhone = await contactsService.findPhoneByName(contactName);
       
       if (realPhone) {
-        console.log(`✅ Gerçek kişide bulundu: ${realPhone}`);
+        console.log(`   Gerçek kişide bulundu: ${realPhone}`);
         return realPhone;
       }
       
-      // Bulunamazsa demo kişilerden ara
-      console.log(`🔄 Demo kişilerde aranıyor: ${contactName}`);
+
+      console.log(`Demo kişilerde aranıyor: ${contactName}`);
       const demoPhone = this.getContactPhone(contactName);
       
       if (demoPhone) {
-        console.log(`✅ Demo kişide bulundu: ${demoPhone}`);
+        console.log(`   Demo kişide bulundu: ${demoPhone}`);
         return demoPhone;
       }
       
-      console.log(`❌ Hiçbir yerde bulunamadı: ${contactName}`);
+      console.log(`   Hiçbir yerde bulunamadı: ${contactName}`);
       return null;
       
     } catch (error) {
       console.error('Kişi arama hatası:', error);
-      return this.getContactPhone(contactName); // Fallback
+      return this.getContactPhone(contactName); 
     }
   }
 }
