@@ -690,11 +690,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
+      "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
       "projectName": "VoiceAssistant.DataAccess",
-      "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
+      "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
       "packagesPath": "/Users/salihustun/.nuget/packages/",
-      "outputPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/",
+      "outputPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/salihustun/.nuget/NuGet/NuGet.Config"

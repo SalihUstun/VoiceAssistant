@@ -10,3 +10,17 @@
 /Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/refint/VoiceAssistant.DataAccess.dll
 /Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.pdb
 /Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/ref/VoiceAssistant.DataAccess.dll
+/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.sourcelink.json
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/bin/Debug/net9.0/VoiceAssistant.DataAccess.deps.json
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/bin/Debug/net9.0/VoiceAssistant.DataAccess.dll
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/bin/Debug/net9.0/VoiceAssistant.DataAccess.pdb
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.csproj.AssemblyReference.cache
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.AssemblyInfoInputs.cache
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.AssemblyInfo.cs
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.csproj.CoreCompileInputs.cache
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.sourcelink.json
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.dll
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/refint/VoiceAssistant.DataAccess.dll
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/VoiceAssistant.DataAccess.pdb
+/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/Debug/net9.0/ref/VoiceAssistant.DataAccess.dll

@@ -7,11 +7,39 @@
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  
+  <!-- Arama izinleri -->
+  <uses-permission android:name="android.permission.CALL_PHONE"/>
+  <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission android:name="android.permission.READ_CONTACTS"/>
+  
+  <!-- Alarm izinleri -->
+  <uses-permission android:name="android.permission.SET_ALARM"/>
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+  <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+  <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+  <uses-permission android:name="com.sec.android.app.clockpackage.permission.SET_ALARM"/>
+  
+  <!-- Uygulama başlatma izinleri -->
+  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+  
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>
       <category android:name="android.intent.category.BROWSABLE"/>
       <data android:scheme="https"/>
+    </intent>
+    <!-- Alarm intent -->
+    <intent>
+      <action android:name="android.intent.action.SET_ALARM"/>
+    </intent>
+    <!-- Call intent -->
+    <intent>
+      <action android:name="android.intent.action.CALL"/>
+    </intent>
+    <!-- App launch intents -->
+    <intent>
+      <action android:name="android.intent.action.MAIN"/>
     </intent>
   </queries>
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true" android:enableOnBackInvokedCallback="false">

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http.Json; // JSON okumak için gerekli
+using System.Net.Http.Json;
 using VoiceAssistant.Business.Abstract;
 using VoiceAssistant.Business.DTOs;
 using VoiceAssistant.DataAccess.Contexts;
@@ -11,11 +11,13 @@ namespace VoiceAssistant.Business.Concrete
     {
         private readonly VoiceAssistantContext _context;
         private readonly HttpClient _httpClient;
+        private readonly ICommandProcessingService _commandProcessingService;
 
-        public AIService(VoiceAssistantContext context, HttpClient httpClient)
+        public AIService(VoiceAssistantContext context, HttpClient httpClient, ICommandProcessingService commandProcessingService)
         {
             _context = context;
             _httpClient = httpClient;
+            _commandProcessingService = commandProcessingService;
         }
 
         public async Task<List<ChatLog>> GetUserHistoryAsync(Guid userId)
@@ -55,6 +57,15 @@ namespace VoiceAssistant.Business.Concrete
 
                 if (result == null) throw new Exception("Python servisi boş cevap döndü.");
 
+                // Komut işleme
+                CommandExecutionResult commandResult = null;
+                if (!string.IsNullOrEmpty(result.Action) && result.Action != "GENERAL_CHAT")
+                {
+                    commandResult = await _commandProcessingService.ExecuteCommandAsync(
+                        result.Action, 
+                        result.Parameters ?? new Dictionary<string, object>(), 
+                        command.UserId);
+                }
 
                 var chatLog = new ChatLog
                 {
@@ -76,6 +87,10 @@ namespace VoiceAssistant.Business.Concrete
                 responseDto.RecognizedText = chatLog.RecognizedText;
                 responseDto.AIResponse = chatLog.AIResponseText;
                 responseDto.AudioUrl = chatLog.AIAudioPath;
+                responseDto.AudioBase64 = result.AudioBase64; // Pass through the base64 audio
+                responseDto.Intent = result.Intent;
+                responseDto.Action = result.Action;
+                responseDto.CommandResult = commandResult;
             }
             catch (Exception ex)
             {

@@ -3936,11 +3936,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.API/VoiceAssistant.API.csproj",
+      "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.API/VoiceAssistant.API.csproj",
       "projectName": "VoiceAssistant.API",
-      "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.API/VoiceAssistant.API.csproj",
+      "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.API/VoiceAssistant.API.csproj",
       "packagesPath": "/Users/salihustun/.nuget/packages/",
-      "outputPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.API/obj/",
+      "outputPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/salihustun/.nuget/NuGet/NuGet.Config"
@@ -3955,8 +3955,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {
-              "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj"
+            "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {
+              "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj"
             }
           }
         }

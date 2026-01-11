@@ -39,6 +39,11 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddScoped<IAIService, AIService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICommandProcessingService, CommandProcessingService>();
+builder.Services.AddScoped<IAlarmService, AlarmService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IAppLauncherService, AppLauncherService>();
+builder.Services.AddScoped<IWeatherService, WeatherService>();
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -80,7 +85,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Disable HTTPS redirection for development
+// app.UseHttpsRedirection();
 app.UseAuthentication(); 
 app.UseAuthorization(); 
 

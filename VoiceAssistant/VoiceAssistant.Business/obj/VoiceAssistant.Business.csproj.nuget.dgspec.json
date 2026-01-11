@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {}
+    "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {}
   },
   "projects": {
-    "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {
+    "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
+        "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
         "projectName": "VoiceAssistant.Business",
-        "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
+        "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
         "packagesPath": "/Users/salihustun/.nuget/packages/",
-        "outputPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/obj/",
+        "outputPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salihustun/.nuget/NuGet/NuGet.Config"
@@ -26,8 +26,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj": {
-                "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj"
+              "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj": {
+                "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj": {
+    "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
+        "projectUniqueName": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
         "projectName": "VoiceAssistant.DataAccess",
-        "projectPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
+        "projectPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/VoiceAssistant.DataAccess.csproj",
         "packagesPath": "/Users/salihustun/.nuget/packages/",
-        "outputPath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.DataAccess/obj/",
+        "outputPath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.DataAccess/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/salihustun/.nuget/NuGet/NuGet.Config"

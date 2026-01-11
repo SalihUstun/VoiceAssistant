@@ -22,6 +22,35 @@ namespace VoiceAssistant.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.Alarm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("interval");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Alarms");
+                });
+
             modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -54,6 +83,39 @@ namespace VoiceAssistant.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.CallLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CallDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ContactName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsSuccessful")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("CallLogs");
                 });
 
             modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.ChatLog", b =>
@@ -97,10 +159,74 @@ namespace VoiceAssistant.DataAccess.Migrations
                     b.ToTable("ChatLogs");
                 });
 
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.Contact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Relationship")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.Alarm", b =>
+                {
+                    b.HasOne("VoiceAssistant.DataAccess.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.CallLog", b =>
+                {
+                    b.HasOne("VoiceAssistant.DataAccess.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.ChatLog", b =>
                 {
                     b.HasOne("VoiceAssistant.DataAccess.Entities.AppUser", "AppUser")
                         .WithMany("ChatLogs")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("VoiceAssistant.DataAccess.Entities.Contact", b =>
+                {
+                    b.HasOne("VoiceAssistant.DataAccess.Entities.AppUser", "AppUser")
+                        .WithMany()
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

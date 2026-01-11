@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zpXKKEkfLvs=",
+  "dgSpecHash": "eC9jygTa8Rc=",
   "success": true,
-  "projectFilePath": "/Users/salihustun/Desktop/VoiceAssistant/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
+  "projectFilePath": "/Users/salihustun/Desktop/VoiceAssistant 2/VoiceAssistant/VoiceAssistant.Business/VoiceAssistant.Business.csproj",
   "expectedPackageFiles": [
     "/Users/salihustun/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/salihustun/.nuget/packages/microsoft.aspnetcore.http/2.3.0/microsoft.aspnetcore.http.2.3.0.nupkg.sha512",
