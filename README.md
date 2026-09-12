@@ -1,5 +1,4 @@
-# VoiceAssistant (Jarvis) 🎙️
-
+# VoiceAssistant
 Türkçe konuşan, sesli komutla alarm kuran, kişi arayan, uygulama açan ve hava durumu söyleyen mobil sesli asistan. Üç katmandan oluşur:
 
 | Katman | Teknoloji | Klasör |
