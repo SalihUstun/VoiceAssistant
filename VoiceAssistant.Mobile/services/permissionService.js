@@ -1,4 +1,5 @@
 import { Alert, Linking, Platform, PermissionsAndroid } from 'react-native';
+import * as Contacts from 'expo-contacts';
 
 class PermissionService {
   
@@ -28,6 +29,7 @@ class PermissionService {
         }
       }
       
+      // iOS'ta tel: / telprompt: için çalışma zamanı izni gerekmez
       return true; 
     } catch (error) {
       console.error('Telefon izni hatası:', error);
@@ -59,7 +61,13 @@ class PermissionService {
         }
       }
       
-      return true;
+      // iOS: izin NSContactsUsageDescription (app.json) ile expo-contacts üzerinden istenir
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        return true;
+      }
+      this.showPermissionDeniedAlert('Kişiler', 'Kişileri arayabilmek için kişiler iznine ihtiyaç var.');
+      return false;
     } catch (error) {
       console.error('Kişiler izni hatası:', error);
       return false;

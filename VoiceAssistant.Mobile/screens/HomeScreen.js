@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Animated, Switch } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, FlatList, SafeAreaView, Animated, Switch, Platform } from 'react-native';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system/legacy'; 
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -271,7 +271,7 @@ export default function HomeScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#121212' }, 
-  header: { padding: 15, paddingTop: 50, backgroundColor: '#1E1E1E', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#333', elevation: 5 },
+  header: { padding: 15, paddingTop: Platform.OS === 'ios' ? 15 : 50, backgroundColor: '#1E1E1E', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#333', elevation: 5 },
   headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#FFF', letterSpacing: 1 },
   iconButton: { padding: 5 },
   chatContainer: { padding: 15, paddingBottom: 170 },

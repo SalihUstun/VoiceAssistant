@@ -6,4 +6,4 @@ ollama
 SpeechRecognition
 pydub
 elevenlabs
-
+python-dotenv

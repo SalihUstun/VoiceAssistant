@@ -10,8 +10,15 @@ from pydub import AudioSegment, silence
 import re
 import json
 from typing import Dict, Any, Optional
+from dotenv import load_dotenv
 
-ELEVENLABS_API_KEY = "sk_8a9394ab1885d419b8dceeb7d34f0042386d2226e99a9aaf"
+# main.py ile aynı klasördeki .env dosyasını yükler (bkz. .env.example)
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+
+# API anahtarı ortam değişkeninden okunur (.env veya export ELEVENLABS_API_KEY="sk_...")
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
+if not ELEVENLABS_API_KEY:
+    print("UYARI: ELEVENLABS_API_KEY ortam değişkeni tanımlı değil. STT/TTS çalışmayacak.")
 
 
 INTENT_PATTERNS = {

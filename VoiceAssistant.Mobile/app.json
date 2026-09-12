@@ -13,9 +13,33 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.seninadın.voiceassistant",
+      "bundleIdentifier": "com.salihustun57.voiceassistantmobile",
       "infoPlist": {
         "NSMicrophoneUsageDescription": "Jarvis'in sizi duyabilmesi için mikrofon izni gerekiyor.",
+        "NSContactsUsageDescription": "Sesli komutla arama yapabilmek için kişilerinize erişim gerekiyor.",
+        "NSLocalNetworkUsageDescription": "Yerel ağdaki VoiceAssistant API sunucusuna bağlanmak için gerekiyor.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSAllowsLocalNetworking": true
+        },
+        "LSApplicationQueriesSchemes": [
+          "tel",
+          "telprompt",
+          "clock-alarm",
+          "whatsapp",
+          "instagram",
+          "fb",
+          "twitter",
+          "spotify",
+          "youtube",
+          "googlegmail",
+          "googlechrome",
+          "comgooglemaps",
+          "tg",
+          "snssdk1233",
+          "nflx",
+          "com.amazon.mobile.shopping"
+        ],
         "UIBackgroundModes": [
           "audio",
           "fetch"
@@ -44,6 +68,12 @@
         "expo-av",
         {
           "microphonePermission": "Jarvis'in sesinizi duyması için izin verin."
+        }
+      ],
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Sesli komutla arama yapabilmek için kişilerinize erişim gerekiyor."
         }
       ]
     ],

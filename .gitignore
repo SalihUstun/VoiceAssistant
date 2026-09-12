@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# .NET
+**/bin/
+**/obj/
+*.user
+.idea/
+.vs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+VoiceAssistant.AI/temp_uploads/
+VoiceAssistant.AI/temp_outputs/
+
+# Ortam değişkenleri / gizli bilgiler
+.env
+.env.local
+
+# Node / Expo (mobil klasörünün kendi .gitignore'u da var)
+node_modules/
+.expo/

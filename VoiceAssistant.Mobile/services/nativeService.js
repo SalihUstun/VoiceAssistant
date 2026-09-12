@@ -9,10 +9,15 @@ class NativeService {
     try {
       console.log(`  Native alarm oluşturuluyor: ${time} - ${label}`);
       
+      const [hours, minutes] = time.split(':').map(num => parseInt(num));
+      console.log(`  Parsed time: ${hours}:${minutes}`);
+
+      if (Platform.OS === 'ios') {
+        await this.createAlarmIOS(hours, minutes, label);
+        return;
+      }
+
       if (Platform.OS === 'android') {
-        const [hours, minutes] = time.split(':').map(num => parseInt(num));
-        console.log(`  Parsed time: ${hours}:${minutes}`);
-        
         const methods = [
           () => this.createAlarmWithIntent(hours, minutes, label),
           () => this.createAlarmWithProvider(hours, minutes, label),
@@ -39,6 +44,31 @@ class NativeService {
     }
   }
   
+  // iOS'ta üçüncü parti uygulamaların alarm kurmasına izin veren bir API yok.
+  // Apple'ın Saat uygulamasını "clock-alarm://" şemasıyla açıp kullanıcıya saati gösteriyoruz.
+  async createAlarmIOS(hours, minutes, label) {
+    const timeText = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    const clockUrl = 'clock-alarm://';
+
+    const supported = await Linking.canOpenURL(clockUrl);
+    if (supported) {
+      await Linking.openURL(clockUrl);
+      setTimeout(() => {
+        Alert.alert(
+          'Saat Uygulaması Açıldı',
+          `Lütfen ${timeText} için "${label}" alarmını kurun.`,
+          [{ text: 'Tamam' }]
+        );
+      }, 1500);
+      return;
+    }
+
+    Alert.alert(
+      'Alarm',
+      `iOS'ta alarm otomatik kurulamıyor. Lütfen Saat uygulamasından ${timeText} için "${label}" alarmını kurun.`
+    );
+  }
+
   async createAlarmWithIntent(hours, minutes, label) {
     const alarmIntent = {
       action: 'android.intent.action.SET_ALARM',
@@ -114,6 +144,11 @@ class NativeService {
   }
   
   async openClockApp() {
+    if (Platform.OS === 'ios') {
+      try { await Linking.openURL('clock-alarm://'); } catch (e) { Alert.alert('Bilgi', 'Saat uygulaması açılamadı'); }
+      return;
+    }
+
     const clockUrls = [
       'android-app://com.google.android.deskclock',
       'android-app://com.android.deskclock',
@@ -139,8 +174,16 @@ class NativeService {
     try {
       console.log(`  Native arama başlatılıyor: ${phoneNumber}`);
       
-      const url = `tel:${phoneNumber}`;
+      // iOS'ta telprompt: aramadan önce onay diyaloğu gösterir, Android'de tel: kullanılır
+      const url = Platform.OS === 'ios' ? `telprompt:${phoneNumber}` : `tel:${phoneNumber}`;
       console.log(`  Arama URL'si: ${url}`);
+
+      if (Platform.OS === 'ios') {
+        // canOpenURL iOS simülatöründe her zaman false döner; gerçek cihazda tel: desteklenir
+        await Linking.openURL(url);
+        console.log('   Arama başlatıldı (iOS)');
+        return;
+      }
       
       const supported = await Linking.canOpenURL(url);
       console.log(`  URL destekleniyor mu: ${supported}`);
@@ -162,6 +205,19 @@ class NativeService {
   async launchApp(packageName, appName) {
     try {
       console.log(`   Uygulama başlatılıyor: ${appName} (${packageName})`);
+
+      if (Platform.OS === 'ios') {
+        // iOS'ta packageName aslında URL şemasıdır (bkz. getAppIdentifier)
+        const appUrl = packageName.includes('://') ? packageName : `${packageName}://`;
+        const supported = await Linking.canOpenURL(appUrl);
+        if (supported) {
+          await Linking.openURL(appUrl);
+          console.log('   Uygulama başlatıldı (iOS)');
+        } else {
+          Alert.alert('Uygulama Bulunamadı', `${appName} yüklü değil veya URL şeması Info.plist'e eklenmemiş.`);
+        }
+        return;
+      }
       
       if (Platform.OS === 'android') {
         const appUrl = `android-app://${packageName}`;
@@ -195,6 +251,32 @@ class NativeService {
     }
   }
   
+
+  // Platforma göre uygulama kimliği: Android'de paket adı, iOS'ta URL şeması
+  getAppIdentifier(appName) {
+    if (Platform.OS === 'ios') return this.getAppUrlScheme(appName);
+    return this.getAppPackageName(appName);
+  }
+
+  // iOS URL şemaları — app.json > ios.infoPlist.LSApplicationQueriesSchemes ile eşleşmeli
+  getAppUrlScheme(appName) {
+    const schemes = {
+      'whatsapp': 'whatsapp',
+      'instagram': 'instagram',
+      'facebook': 'fb',
+      'twitter': 'twitter',
+      'spotify': 'spotify',
+      'youtube': 'youtube',
+      'gmail': 'googlegmail',
+      'chrome': 'googlechrome',
+      'maps': 'comgooglemaps',
+      'telegram': 'tg',
+      'tiktok': 'snssdk1233',
+      'netflix': 'nflx',
+      'amazon': 'com.amazon.mobile.shopping'
+    };
+    return schemes[appName.toLowerCase()];
+  }
 
   getAppPackageName(appName) {
     const packages = {

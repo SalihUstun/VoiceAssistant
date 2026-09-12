@@ -131,6 +131,7 @@ class CommandService {
       console.log(' Alarm detayları:', { time, label });
       
       Alert.alert(
+        "Alarm Kur",
         `${time} saatinde "${label}" alarmı oluşturulsun mu?`,
         [
           { text: "İptal", style: "cancel" },
@@ -213,7 +214,7 @@ class CommandService {
       
 
       const appName = result.data?.app_name;
-      const packageName = nativeService.getAppPackageName(appName);
+      const packageName = nativeService.getAppIdentifier(appName);
       
       if (packageName) {
         Alert.alert(

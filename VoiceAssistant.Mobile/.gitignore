@@ -9,3 +9,6 @@ android/app/build/
 ios/build/
 *.so
 *.apk
+.env
+.env.local
+ios/Pods/
